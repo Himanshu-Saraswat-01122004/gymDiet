@@ -41,3 +41,38 @@ export const calculateCalories = (data: UserData) => {
   }
 };
 
+export interface Macronutrients {
+  protein: number;
+  carbs: number;
+  fats: number;
+}
+
+const macroRatios = {
+  'weight-loss': { protein: 0.4, carbs: 0.3, fats: 0.3 },
+  'maintenance': { protein: 0.3, carbs: 0.4, fats: 0.3 },
+  'weight-gain': { protein: 0.3, carbs: 0.5, fats: 0.2 },
+};
+
+export const calculateMacronutrients = (
+  totalCalories: number,
+  goal: 'weight-loss' | 'weight-gain' | 'maintenance'
+): Macronutrients => {
+  const ratios = macroRatios[goal];
+
+  const proteinCalories = totalCalories * ratios.protein;
+  const carbCalories = totalCalories * ratios.carbs;
+  const fatCalories = totalCalories * ratios.fats;
+
+  // 1g protein = 4 cal, 1g carb = 4 cal, 1g fat = 9 cal
+  const proteinGrams = Math.round(proteinCalories / 4);
+  const carbGrams = Math.round(carbCalories / 4);
+  const fatGrams = Math.round(fatCalories / 9);
+
+  return {
+    protein: proteinGrams,
+    carbs: carbGrams,
+    fats: fatGrams,
+  };
+};
+
+
