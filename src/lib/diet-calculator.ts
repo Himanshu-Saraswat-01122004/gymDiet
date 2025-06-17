@@ -7,6 +7,8 @@ export interface UserData {
   goal: 'weight-loss' | 'weight-gain' | 'maintenance';
   dietPreference: 'vegetarian' | 'non-vegetarian' | 'eggetarian';
   dietStyle: string;
+  allergies?: string;
+  exclude?: string;
 }
 
 const activityFactors = {
@@ -73,6 +75,14 @@ export const calculateMacronutrients = (
     carbs: carbGrams,
     fats: fatGrams,
   };
+};
+
+export const calculateWaterIntake = (weight: number): number => {
+  // A common recommendation is 30-35ml of water per kg of body weight.
+  // We'll use 35ml/kg as a baseline.
+  const waterInLiters = (weight * 35) / 1000;
+  // Return rounded to one decimal place
+  return Math.round(waterInLiters * 10) / 10;
 };
 
 
