@@ -8,7 +8,7 @@ interface DietFormProps {
   setError: (error: string | null) => void;
   isLoading: boolean;
 }
-import { Target, Weight, User, Zap, Dumbbell, Ruler, Bot, Loader, Leaf, Globe, ChevronDown, AlertTriangle, Ban } from 'lucide-react';
+import { Target, Weight, User, Zap, Dumbbell, Ruler, Bot, Loader, Leaf, Globe, ChevronDown, AlertTriangle, Ban, MessageSquare } from 'lucide-react';
 import type { UserData } from '@/lib/diet-calculator';
 
 export default function DietForm({ setIsLoading, setDietPlanHtml, setError, isLoading }: DietFormProps) {
@@ -20,13 +20,14 @@ export default function DietForm({ setIsLoading, setDietPlanHtml, setError, isLo
     dietStyle: 'North Indian',
     allergies: '',
     exclude: '',
+    comments: '',
   });
   const [age, setAge] = useState<string>('');
   const [height, setHeight] = useState<string>('');
   const [weight, setWeight] = useState<string>('');
   const [isAdvancedOpen, setIsAdvancedOpen] = useState(false);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     if (name === 'age') setAge(value);
     else if (name === 'height') setHeight(value);
@@ -200,6 +201,13 @@ export default function DietForm({ setIsLoading, setDietPlanHtml, setError, isLo
                 <div className="relative">
                   <Ban className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
                   <input type="text" id="exclude" name="exclude" value={formData.exclude} onChange={handleInputChange} className="w-full pl-10 pr-4 py-3 bg-gray-700/50 border border-gray-600 rounded-lg text-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all" placeholder="e.g., mushrooms, spicy food" />
+                </div>
+              </div>
+              <div className="relative">
+                <label htmlFor="comments" className="block text-sm font-medium text-gray-300 mb-2">Additional Comments</label>
+                <div className="relative">
+                  <MessageSquare className="absolute left-3 top-3.5 -translate-y-0 h-5 w-5 text-gray-400" />
+                  <textarea id="comments" name="comments" value={formData.comments} onChange={handleInputChange} rows={3} className="w-full pl-10 pr-4 py-3 bg-gray-700/50 border border-gray-600 rounded-lg text-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all" placeholder="e.g., prefer light dinner, need more snack options"></textarea>
                 </div>
               </div>
             </div>

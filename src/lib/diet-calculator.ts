@@ -9,6 +9,7 @@ export interface UserData {
   dietStyle: string;
   allergies?: string;
   exclude?: string;
+  comments?: string;
 }
 
 const activityFactors = {

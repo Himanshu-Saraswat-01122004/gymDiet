@@ -39,6 +39,7 @@ export async function POST(req: NextRequest) {
       - Diet Preference: ${fullDietDescription}
       - Allergies: ${allergies || 'None specified'}
       - Foods to Exclude: ${exclude || 'None specified'}
+      - Additional Comments: ${userData.comments || 'None specified'}
 
       First, create a summary section as a single HTML <div>. This div should contain the key nutritional targets: total calories, protein, carbs, fats, and water intake.
       The summary div should be structured exactly like this example, using these exact class names:
@@ -76,6 +77,7 @@ export async function POST(req: NextRequest) {
       - Cuisine Style: ${userData.dietStyle}
       - Allergies: ${userData.allergies || 'None specified'}
       - Foods to Exclude: ${userData.exclude || 'None specified'}
+      - Additional Comments: ${userData.comments || 'None specified'}
 
       Use Tailwind CSS classes for styling to ensure a modern and clean look. The entire response should be a single block of HTML, starting with the nutrition summary div.
         </thead>
